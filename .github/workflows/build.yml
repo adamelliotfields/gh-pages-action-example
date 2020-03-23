@@ -5,6 +5,7 @@ on:
 
 env:
   CI: true
+  GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
 jobs:
   default:
@@ -29,4 +30,15 @@ jobs:
         run: npm run build
       - name: Deploy
         if: github.ref == 'refs/heads/master'
-        run: npm run deploy
+        run: |
+          touch "${HOME}/.git-credentials"
+          touch "${HOME}/.gitconfig"
+          echo "https://adamelliotfields:${GH_TOKEN}@github.com" > "${HOME}/.git-credentials"
+          cat <<EOF > "${HOME}/.gitconfig"
+          [user]
+            name = Adam Fields
+            email = adam.elliot.fields@gmail.com
+          [credential]
+            helper = store
+          EOF
+          npm run publish
