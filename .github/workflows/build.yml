@@ -5,6 +5,7 @@ on:
 
 env:
   CI: true
+  # This is a GitHub Personal Access Token with `repo` scope.
   GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
 jobs:
@@ -30,6 +31,7 @@ jobs:
         run: npm run build
       - name: Deploy
         if: github.ref == 'refs/heads/master'
+        # Use the token as our password to authenticate (https://git-scm.com/docs/git-credential-store).
         run: |
           touch "${HOME}/.git-credentials"
           touch "${HOME}/.gitconfig"
