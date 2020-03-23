@@ -41,4 +41,4 @@ jobs:
           [credential]
             helper = store
           EOF
-          npm run publish
+          npm run deploy
