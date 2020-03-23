@@ -5,7 +5,7 @@
   "main": "src/index.html",
   "scripts": {
     "build": "run-s clean bundle",
-    "bundle": "cross-env NODE_ENV=production parcel build src/index.html",
+    "bundle": "cross-env NODE_ENV=production parcel build --public-url=/gh-pages-action/ src/index.html",
     "clean": "rimraf dist",
     "deploy": "gh-pages -d dist",
     "start": "parcel src/index.html"
